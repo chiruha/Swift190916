@@ -403,5 +403,69 @@ enum HTTPCode: Int{
 print(HTTPCode.OK.rawValue)
 print(HTTPCode.OK.getDescription())
 
+// 확장구문 (extension)
+extension Double{
+    var km: Double{ return self*1000 }
+    var m: Double{ return self }
+    var cm: Double{ return self/100 }
+    var mm: Double{ return self/1000 }
+    var desc: String{ return "\(self.km)km is \(self.m)m \(self.cm)cm \(self.mm)mm "}
+}
+
+5.4.km
+print("\(125.1.desc)")
+
+extension Int {
+    func repeatation(task:() -> Void){
+        for _ in 1...self {
+            task()
+        }
+    }
+    
+    mutating func square() {
+        self = self * self
+    }
+}
+
+var value1 = 4
+value1.square()
+
+3.repeatation {
+    print("hello world1")
+}
 
 
+10.repeatation {
+    print("hello swift")
+}
+
+// 프로토콜
+protocol MyProtocol{
+    var name: String {get set} // 저장 프로퍼티는 get 이나 get set이 필요
+    var description: String{get}
+    init()
+    init(param: String)
+}
+
+class MyParent{
+    init() {}
+}
+
+class MyImplement: MyParent, MyProtocol{ // 제일 앞에는 상속받을 클래스가 온다
+    var name = "john"
+    var description: String{
+        return "name is \(name)"
+    }
+
+    required override init() {
+    
+    }
+    
+    required init(param: String) {
+        
+    }
+    
+}
+
+let implement = MyImplement()
+implement.name 
